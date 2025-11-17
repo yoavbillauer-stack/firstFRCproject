@@ -1,6 +1,5 @@
 package frc.robot.subsystems.wheel;
 
-
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.hardware.core.CoreCANrange;
