@@ -1,0 +1,25 @@
+package frc.robot.subsystems.wheel;
+
+import com.ctre.phoenix6.controls.VoltageOut;
+import com.ctre.phoenix6.hardware.TalonFX;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class Wheel extends SubsystemBase {
+    private final TalonFX motor = WheelConstants.MOTOR;
+    private final VoltageOut voltageRequest = new VoltageOut(0).withEnableFOC(WheelConstants.FOC_ENABLED);
+
+    public Wheel() {
+    }
+
+    void eject(){
+        setTargetVoltage(WheelConstants.EJECT_VOLTAGE);
+    }
+
+    void colect(){
+        setTargetVoltage(WheelConstants.COLECT_VOLTAGE);
+    }
+
+    void setTargetVoltage(double voltage) {
+        motor.setControl(voltageRequest.withOutput(voltage));
+    }
+}
