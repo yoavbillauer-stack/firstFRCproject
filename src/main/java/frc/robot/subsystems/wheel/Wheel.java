@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Wheel extends SubsystemBase {
     private final VoltageOut voltageRequest = new VoltageOut(0).withEnableFOC(WheelConstants.FOC_ENABLED);
     private final TalonFX motor = WheelConstants.MOTOR;
-    void setTargetVoltage(double voltage){
-        motor.setControl(voltageRequest.withOutput(voltage));
-    }
+
     public Wheel() {
     }
+
+    void setTargetVoltage(double voltage) {
+        motor.setControl(voltageRequest.withOutput(voltage));
+    }
 }
-
-
