@@ -10,9 +10,9 @@ public class WheelConstants {
     static final TalonFX MOTOR = new TalonFX(MOTOR_ID);
 
     static final boolean FOC_ENABLED = true;
-    static final double EJECT_VOLTAGE =-6;
-    static final double COLECT_VOLTAGE =6;
-    
+    static final double EJECT_VOLTAGE = -6;
+    static final double COLECT_VOLTAGE = 6;
+
     static {
         final TalonFXConfiguration config =new TalonFXConfiguration();
         config.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;

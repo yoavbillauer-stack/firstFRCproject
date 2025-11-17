@@ -10,10 +10,10 @@ public class Wheel extends SubsystemBase {
 
     public Wheel() {
     }
-    public void eject(){
+    void eject(){
         motor.setVoltage(WheelConstants.EJECT_VOLTAGE);
     }
-    public void colect(){
+    void colect(){
         motor.setVoltage(WheelConstants.COLECT_VOLTAGE);
     }
 
