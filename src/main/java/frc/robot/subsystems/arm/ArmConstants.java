@@ -25,6 +25,7 @@ public class ArmConstants {
         final TalonFXConfiguration config = new TalonFXConfiguration();
         config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         config.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+        
         MOTOR.getConfigurator().apply(config);
         ANGLE_ENCODER_POSITION_SIGNAL.setUpdateFrequency(100);
         ENCODER.optimizeBusUtilization();
