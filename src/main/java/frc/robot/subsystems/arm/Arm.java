@@ -22,4 +22,8 @@ public class Arm extends SubsystemBase {
     void theWork(double setPoint){
         setTargetVoltage(requiredPower(setPoint));
     }
+    void stop (){
+        motor.stopMotor();
+    }
+
 }
