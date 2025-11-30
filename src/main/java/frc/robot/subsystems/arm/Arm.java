@@ -9,19 +9,22 @@ public class Arm extends SubsystemBase {
     private final TalonFX motor = ArmConstants.MOTOR;
     private final VoltageOut voltageRequest = new VoltageOut(0).withEnableFOC(ArmConstants.FOC_ENABLED);
 
-    public double getAngleEncoderPositionRotation(){
+        void setTargetVoltage(double voltage) {
+        motor.setControl(voltageRequest.withOutput(voltage));
+    }
+
+    double requiredPower(double targetAngle){
+        return ArmConstants.PID_CONTROLLER.calculate(getCurrentAngleRotations(), targetAngle);
+    }
+
+    double getCurrentAngleRotations(){
         return ArmConstants.ANGLE_ENCODER_POSITION_SIGNAL.refresh().getValueAsDouble();
     }
 
-    void setTargetVoltage(double voltage) {
-        motor.setControl(voltageRequest.withOutput(voltage));
+    void theWork(double targetAngle){
+        setTargetVoltage(requiredPower(targetAngle));
     }
-    double requiredPower(double setPoint){
-        return ArmConstants.PID_CONTROLLER.calculate(getAngleEncoderPositionRotation(), setPoint);
-    }
-    void theWork(double setPoint){
-        setTargetVoltage(requiredPower(setPoint));
-    }
+
     void stop (){
         motor.stopMotor();
     }
