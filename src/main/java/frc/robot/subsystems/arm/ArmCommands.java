@@ -12,6 +12,5 @@ public class ArmCommands {
                 (interrupted) -> RobotContainer.ARM.stop(),
                 ()-> false
         );
-
     }
 }

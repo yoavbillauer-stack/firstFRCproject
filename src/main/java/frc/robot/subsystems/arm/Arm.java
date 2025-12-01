@@ -5,12 +5,15 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
-    private static final boolean FOC_ENABLED = true;
     private final TalonFX motor = ArmConstants.MOTOR;
     private final VoltageOut voltageRequest = new VoltageOut(0).withEnableFOC(ArmConstants.FOC_ENABLED);
 
-        void setTargetVoltage(double voltage) {
+    void calculatePIDOutput(double voltage) {
         motor.setControl(voltageRequest.withOutput(voltage));
+    }
+
+    void theWork(double targetAngle){
+        calculatePIDOutput(requiredPower(targetAngle));
     }
 
     double requiredPower(double targetAngle){
@@ -21,11 +24,7 @@ public class Arm extends SubsystemBase {
         return ArmConstants.ANGLE_ENCODER_POSITION_SIGNAL.refresh().getValueAsDouble();
     }
 
-    void theWork(double targetAngle){
-        setTargetVoltage(requiredPower(targetAngle));
-    }
-
-    void stop (){
+    void stop() {
         motor.stopMotor();
     }
 
