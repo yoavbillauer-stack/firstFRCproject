@@ -26,13 +26,17 @@ public class ArmConstants {
         configureMotor();
         configureEncoder();
     }
+
     static void configureEncoder() {
-        final CANcoderConfiguration cancoderConfig = new CANcoderConfiguration();
-        cancoderConfig.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
-        ENCODER.getConfigurator().apply(cancoderConfig);
+        final CANcoderConfiguration config = new CANcoderConfiguration();
+        config.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
+        config.MagnetSensor.MagnetOffset = 0;
+        config.MagnetSensor.AbsoluteSensorDiscontinuityPoint = 0.0;
+        ENCODER.getConfigurator().apply(config);
         ANGLE_ENCODER_POSITION_SIGNAL.setUpdateFrequency(100);
         ENCODER.optimizeBusUtilization();
     }
+
     static void configureMotor() {
         final TalonFXConfiguration config = new TalonFXConfiguration();
         config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
