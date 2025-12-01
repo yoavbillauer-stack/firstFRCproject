@@ -8,7 +8,7 @@ public class Arm extends SubsystemBase {
     private final TalonFX motor = ArmConstants.MOTOR;
     private final VoltageOut voltageRequest = new VoltageOut(0).withEnableFOC(ArmConstants.FOC_ENABLED);
 
-    void setControl(double voltage) {
+    void setVoltegControl(double voltage) {
         motor.setControl(voltageRequest.withOutput(voltage));
     }
 
