@@ -12,8 +12,8 @@ public class Arm extends SubsystemBase {
         motor.setControl(voltageRequest.withOutput(voltage));
     }
 
-    void finalCalculation(double targetAngle){
-        calculatePIDOutput(calculatePIDOutput(targetAngle));
+    void moveToAngle(double targetAngle){
+        setVoltegControl(calculatePIDOutput(targetAngle));
     }
 
     double calculatePIDOutput(double targetAngle){
