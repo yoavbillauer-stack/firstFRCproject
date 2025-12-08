@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import frc.robot.RobotContainer;
 
 public class ArmCommands {
-    public static Command getCollectComand(double targetAngle){
+    public static Command getCollectAndEjectComand(double targetAngle){
         return new FunctionalCommand(
-                () -> RobotContainer.ARM.theWork(targetAngle),
-                () -> RobotContainer.ARM.theWork(targetAngle),
+                () -> RobotContainer.ARM.moveToAngle(targetAngle),
+                () -> RobotContainer.ARM.moveToAngle(targetAngle),
                 (interrupted) -> RobotContainer.ARM.stop(),
                 ()-> false
         );
