@@ -45,4 +45,19 @@ public class ArmConstants {
         MOTOR.optimizeBusUtilization();
 
     }
+    public enum State {
+        LOW(15),
+        HIGH(45),
+        RESTING(0);
+
+        final double targetAngle;
+
+        State(double targetAngle) {
+            this.targetAngle = targetAngle;
+        }
+
+        public double getTargetAngle() {
+            return targetAngle;
+        }
+    }
 }
