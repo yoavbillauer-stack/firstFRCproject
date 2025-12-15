@@ -2,13 +2,17 @@ package frc.robot.subsystems.arm;
 
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import static edu.wpi.first.units.Units.Radians;
 
 public class Arm extends SubsystemBase {
     private final TalonFX motor = ArmConstants.MOTOR;
     private final VoltageOut voltageRequest = new VoltageOut(0).withEnableFOC(ArmConstants.FOC_ENABLED);
 
-    void moveToAngle(double targetAngle) {
+    void setTargetAngle(Rotation2d targetAngle) {
         setTargetVoltage(calculatePIDOutput(targetAngle));
     }
 
@@ -16,12 +20,12 @@ public class Arm extends SubsystemBase {
         motor.setControl(voltageRequest.withOutput(voltage));
     }
 
-    private double calculatePIDOutput(double targetAngle) {
-        return ArmConstants.PID_CONTROLLER.calculate(getCurrentAngleRotations(), targetAngle);
+    private double calculatePIDOutput(Rotation2d targetAngle) {
+        return ArmConstants.PID_CONTROLLER.calculate(getCurrentAngleRotations(),new Rotation2d(targetAngle));
     }
 
-    private double getCurrentAngleRotations() {
-        return ArmConstants.ANGLE_ENCODER_POSITION_SIGNAL.refresh().getValueAsDouble();
+    private Rotation2d getCurrentAngleRotations() {
+        return new Rotation2d(ArmConstants.ANGLE_ENCODER_POSITION_SIGNAL.refresh().getValue());
     }
 
     void stop() {
@@ -29,7 +33,7 @@ public class Arm extends SubsystemBase {
     }
 
     void setTargetState(ArmConstants.State state) {
-        moveToAngle(state.targetAngle);
+        setTargetAngle(state.targetAngle);
     }
 
 }

@@ -9,6 +9,7 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Angle;
 
 public class ArmConstants {
@@ -46,17 +47,17 @@ public class ArmConstants {
 
     }
     public enum State {
-        LOW(15),
-        HIGH(45),
-        RESTING(0);
+        LOW(Rotation2d.fromDegrees(15)),
+        HIGH(Rotation2d.fromDegrees(45)),
+        RESTING(Rotation2d.fromDegrees(0));
 
-        final double targetAngle;
+        final Rotation2d targetAngle;
 
-        State(double targetAngle) {
+        State(Rotation2d targetAngle) {
             this.targetAngle = targetAngle;
         }
 
-        public double getTargetAngle() {
+        public Rotation2d getTargetAngle() {
             return targetAngle;
         }
     }
