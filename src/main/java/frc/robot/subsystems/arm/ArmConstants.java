@@ -28,7 +28,7 @@ public class ArmConstants {
         configureEncoder();
     }
 
-    static void configureEncoder() {
+    private static void configureEncoder() {
         final CANcoderConfiguration config = new CANcoderConfiguration();
         config.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
         config.MagnetSensor.MagnetOffset = 0;
@@ -38,27 +38,23 @@ public class ArmConstants {
         ENCODER.optimizeBusUtilization();
     }
 
-    static void configureMotor() {
+    private static void configureMotor() {
         final TalonFXConfiguration config = new TalonFXConfiguration();
         config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         config.MotorOutput.NeutralMode = NeutralModeValue.Coast;
         MOTOR.getConfigurator().apply(config);
         MOTOR.optimizeBusUtilization();
-
     }
+
     public enum State {
         LOW(Rotation2d.fromDegrees(15)),
         HIGH(Rotation2d.fromDegrees(45)),
-        RESTING(Rotation2d.fromDegrees(0));
+        REST(Rotation2d.fromDegrees(0));
 
         final Rotation2d targetAngle;
 
         State(Rotation2d targetAngle) {
             this.targetAngle = targetAngle;
-        }
-
-        public Rotation2d getTargetAngle() {
-            return targetAngle;
         }
     }
 }

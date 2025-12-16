@@ -6,6 +6,15 @@ import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import frc.robot.RobotContainer;
 
 public class ArmCommands {
+    public static Command getSetTargetStateCommand(ArmConstants.State state){
+        return new FunctionalCommand(
+                () -> RobotContainer.ARM.setTargetState(state),
+                () -> RobotContainer.ARM.setTargetState(state),
+                (interrupted) -> RobotContainer.ARM.stop(),
+                ()-> false
+        );
+    }
+
     public static Command getSetTargetAngleCommand(Rotation2d targetAngle){
         return new FunctionalCommand(
                 () -> RobotContainer.ARM.setTargetAngle(targetAngle),
@@ -14,10 +23,4 @@ public class ArmCommands {
                 ()-> false
         );
     }
-    public static Command getSetTargetState(){
-        return new FunctionalCommand(
-                () ->
-        )
-    }
 }
-
