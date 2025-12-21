@@ -1,4 +1,4 @@
 package frc.robot.subsystem.tank;
 
-public class Tankcommands {
+public class TankCommands {
 }
